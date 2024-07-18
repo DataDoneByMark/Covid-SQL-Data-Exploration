@@ -161,3 +161,46 @@ join ['Covid Vaccinations$'] vac
 WHERE dea.continent IS NOT NULL
 	AND vac.new_vaccinations IS NOT NULL
 --order by 2,3
+
+
+
+------queires used for porfolio project in tableau----------------------------------------------------------------------
+
+
+SELECT 
+    SUM(new_cases) AS total_cases,
+    SUM(CAST(new_deaths AS int)) AS total_deaths,
+    CASE
+        WHEN SUM(new_cases) = 0 THEN 0  -- Handle division by zero
+        ELSE SUM(CAST(new_deaths AS int)) / NULLIF(SUM(new_cases), 0) * 100
+    END AS DeathPercentage
+FROM ['Covid Deaths$']
+WHERE continent IS NOT NULL
+ORDER BY 1,2
+
+
+
+
+Select Location, Max(cast(total_deaths as int)) as TotalDeathCount
+from ['Covid Deaths$']
+where continent is null
+		AND location not like '%income%'
+group by location 
+order by TotalDeathCount desc
+
+
+
+Select Location, Population,MAX(total_cases) as HightestInfectionCount, MAX((Total_cases/population))*100 as PercentPopulationInfected
+From ['Covid Deaths$']
+group by location,Population
+order by PercentPopulationInfected Desc
+
+
+
+
+
+
+Select Location, Population, date, MAX(total_cases) as HightestInfectionCount, MAX((Total_cases/population))*100 as PercentPopulationInfected
+From ['Covid Deaths$']
+group by location,Population, date
+order by PercentPopulationInfected Desc
