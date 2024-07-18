@@ -1,4 +1,4 @@
-This was an SQL data exploration project performed in SSMS (SQL Server Managaement Studio) on a data set from ourworldindata.org
+This was an SQL data exploration project performed in SSMS (SQL Server Management Studio) on a data set from ourworldindata.org
 
 Analysis results include but are not limited to:
 Comparing total cases to total deaths by region.
